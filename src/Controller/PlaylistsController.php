@@ -34,6 +34,8 @@ class PlaylistsController extends AbstractController {
      */
     private $categorieRepository;    
     
+    private const PLAYLISTS_TEMPLATE = "pages/playlists.html.twig";
+    
     function __construct(PlaylistRepository $playlistRepository, 
             CategorieRepository $categorieRepository,
             FormationRepository $formationRespository) {
@@ -50,7 +52,7 @@ class PlaylistsController extends AbstractController {
     public function index(): Response{
         $playlists = $this->playlistRepository->findAllOrderByName('ASC');
         $categories = $this->categorieRepository->findAll();
-        return $this->render("pages/playlists.html.twig", [
+        return $this->render(self::PLAYLISTS_TEMPLATE, [
             'playlists' => $playlists,
             'categories' => $categories            
         ]);
@@ -58,13 +60,11 @@ class PlaylistsController extends AbstractController {
 
     #[Route('/playlists/tri/{champ}/{ordre}', name: 'playlists.sort')]
     public function sort($champ, $ordre): Response{
-        switch($champ){
-            case "name":
+        if($champ === "name"){
                 $playlists = $this->playlistRepository->findAllOrderByName($ordre);
-                break;
         }
         $categories = $this->categorieRepository->findAll();
-        return $this->render("pages/playlists.html.twig", [
+        return $this->render(self::PLAYLISTS_TEMPLATE, [
             'playlists' => $playlists,
             'categories' => $categories            
         ]);
@@ -75,7 +75,7 @@ class PlaylistsController extends AbstractController {
         $valeur = $request->get("recherche");
         $playlists = $this->playlistRepository->findByContainValue($champ, $valeur, $table);
         $categories = $this->categorieRepository->findAll();
-        return $this->render("pages/playlists.html.twig", [
+        return $this->render(self::PLAYLISTS_TEMPLATE, [
             'playlists' => $playlists,
             'categories' => $categories,            
             'valeur' => $valeur,
@@ -88,7 +88,7 @@ class PlaylistsController extends AbstractController {
         $playlist = $this->playlistRepository->find($id);
         $playlistCategories = $this->categorieRepository->findAllForOnePlaylist($id);
         $playlistFormations = $this->formationRepository->findAllForOnePlaylist($id);
-        return $this->render("pages/playlist.html.twig", [
+        return $this->render(self::PLAYLISTS_TEMPLATE, [
             'playlist' => $playlist,
             'playlistcategories' => $playlistCategories,
             'playlistformations' => $playlistFormations

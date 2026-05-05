@@ -13,7 +13,7 @@
     </p>
     <p>
         Voici les <strong>deux dernières formations</strong> ajoutées au catalogue :
-        <table class="table">
+        <table class="table" description="Deux dernières formations ajoutées au catalogue">
             <tr>
                 {% for formation in formations %}
                     <td>
@@ -23,10 +23,11 @@
                                 {% if formation.picture %}
                                     <a href="{{ path('formations.showone', {id:formation.id}) }}">
                                     <img src="{{ formation.picture }}" 
-                                         class="card-img-top" style="width:100%;height:auto;">
+                                         class="card-img-top" style="width:100%;height:auto;"
+                                         alt="Miniature de la vidéo de formation">
                                     </a>    
                                 {% endif %}
-                            </div>
+                        c    </div>
                             <div class="col">
                                 <p>{{ formation.publishedatstring }}</p>
                                 <h5 class="text-info mt-1">

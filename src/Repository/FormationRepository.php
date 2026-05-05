@@ -35,7 +35,7 @@ class FormationRepository extends ServiceEntityRepository
      * @param type $table si $champ dans une autre table
      * @return Formation[]
      */
-    public function findAllOrderBy($champ, $ordre, $table=""): array{
+    public function findAllOrderBy($champ, $ordre, $table=""): array {
         if($table==""){
             return $this->createQueryBuilder('f')
                     ->orderBy('f.'.$champ, $ordre)
