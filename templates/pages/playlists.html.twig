@@ -32,6 +32,11 @@
                         </select>                    
                     </form>            
                 </th>
+                <th class="text-left align-top" scope="col">
+                    nombre de formations </br>
+                    <a href="{{ path('playlists.sort', {champ:'nbFormations', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
+                    <a href="{{ path('playlists.sort', {champ:'nbFormations', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
+                </th>
                 <th class="text-center align-top" scope="col">
                     &nbsp;
                 </th>				
@@ -40,23 +45,25 @@
         <tbody>
             <!-- boucle sur les playlists -->
             {% if playlists|length > 0 %}
-                {% for k in 0..playlists|length-1 %}
+                {% for playlist in playlists %}
                     <tr class="align-middle">
                         <td>
                             <h5 class="text-info">
-                                {{ playlists[k].name }}
+                                {{ playlist.name }}
                             </h5>
                         </td>                 
                         <td class="text-left">
-                            {% set categories = playlists[k].categoriesplaylist %}
-                            {% if categories|length > 0  %}
-                                {% for c in 0..categories|length-1 %}
-                                    &nbsp;{{ categories[c] }}                                  
-                                {% endfor %}
-                            {% endif %}
-                        </td>            					
+                            {% for category in playlist.categoriesplaylist %}
+                                 &nbsp;{{ category }}
+                            {% endfor %}
+                        </td>   
+                        <td>
+                            <h5 class="text-info">
+                                {{ playlist.nbFormations }}
+                            </h5>
+                        </td>
                         <td class="text-center">
-                            <a href="{{ path('playlists.showone', {id:playlists[k].id}) }}" class="btn btn-secondary">Voir détail</a>
+                            <a href="{{ path('playlists.showone', {id:playlist.id}) }}" class="btn btn-secondary">Voir détail</a>
                         </td> 					
                     </tr>
                 {% endfor %}	

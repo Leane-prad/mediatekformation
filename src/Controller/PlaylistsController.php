@@ -62,6 +62,10 @@ class PlaylistsController extends AbstractController {
     public function sort($champ, $ordre): Response{
         if($champ === "name"){
                 $playlists = $this->playlistRepository->findAllOrderByName($ordre);
+        }else{
+            if($champ === "nbFormations"){
+                $playlists = $this->playlistRepository->findAllOrderByNbFormations($ordre);
+            }
         }
         $categories = $this->categorieRepository->findAll();
         return $this->render(self::PLAYLISTS_TEMPLATE, [
@@ -88,7 +92,7 @@ class PlaylistsController extends AbstractController {
         $playlist = $this->playlistRepository->find($id);
         $playlistCategories = $this->categorieRepository->findAllForOnePlaylist($id);
         $playlistFormations = $this->formationRepository->findAllForOnePlaylist($id);
-        return $this->render(self::PLAYLISTS_TEMPLATE, [
+        return $this->render("pages/playlist.html.twig", [
             'playlist' => $playlist,
             'playlistcategories' => $playlistCategories,
             'playlistformations' => $playlistFormations
