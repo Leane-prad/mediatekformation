@@ -93,6 +93,7 @@ class AdminPlaylistsController extends AbstractController {
         $playlist = $this->playlistRepository->find($id);
         if ($playlist->getNbFormations() === 0) {
             $this->playlistRepository->remove($playlist);
+            
         }else{
             $this->addFlash(
                     'error',
