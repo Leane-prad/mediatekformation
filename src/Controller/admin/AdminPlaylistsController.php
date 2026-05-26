@@ -77,6 +77,7 @@ class AdminPlaylistsController extends AbstractController {
 
     #[Route('admin/playlists/recherche/{champ}/{table}', name: 'admin.playlists.findallcontain')]
     public function findAllContain($champ, Request $request, $table = ""): Response {
+        if($this->isCsrfTokenValid('filtre_'.$champ,$request->get('_token'))){
         $valeur = $request->get("recherche");
         $playlists = $this->playlistRepository->findByContainValue($champ, $valeur, $table);
         $categories = $this->categorieRepository->findAll();
@@ -85,7 +86,8 @@ class AdminPlaylistsController extends AbstractController {
                     'categories' => $categories,
                     'valeur' => $valeur,
                     'table' => $table
-        ]);
+        ]);}
+        return $this->redirectToRoute(self::ADMIN_PLAYLISTS_TEMPLATE);
     }
 
     #[Route('/admin/playlist/suppr/{id}', name: 'admin.playlist.suppr')]

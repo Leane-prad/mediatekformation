@@ -56,6 +56,7 @@ class FormationsController extends AbstractController {
 
     #[Route('/formations/recherche/{champ}/{table}', name: 'formations.findallcontain')]
     public function findAllContain($champ, Request $request, $table=""): Response{
+        if($this->isCsrfTokenValid('filtre_'.$champ,$request->get('_token'))){
         $valeur = $request->get("recherche");
         $formations = $this->formationRepository->findByContainValue($champ, $valeur, $table);
         $categories = $this->categorieRepository->findAll();
@@ -64,7 +65,8 @@ class FormationsController extends AbstractController {
             'categories' => $categories,
             'valeur' => $valeur,
             'table' => $table
-        ]);
+        ]);}
+        return $this->redirectToRoute(self::FORMATIONS_TEMPLATE);
     }  
 
     #[Route('/formations/formation/{id}', name: 'formations.showone')]
