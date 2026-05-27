@@ -86,7 +86,7 @@ class PlaylistsController extends AbstractController {
             'valeur' => $valeur,
             'table' => $table
         ]);}
-        return $this->redirectToRoute(self::PLAYLISTS_TEMPLATE);
+        return $this->redirectToRoute('playlists');
     }  
 
     #[Route('/playlists/playlist/{id}', name: 'playlists.showone')]

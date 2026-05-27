@@ -66,7 +66,7 @@ class FormationsController extends AbstractController {
             'valeur' => $valeur,
             'table' => $table
         ]);}
-        return $this->redirectToRoute(self::FORMATIONS_TEMPLATE);
+        return $this->redirectToRoute('formations');
     }  
 
     #[Route('/formations/formation/{id}', name: 'formations.showone')]

@@ -40,7 +40,7 @@ class PlaylistRepository extends ServiceEntityRepository
                 ->groupBy('p.id')
                 ->orderBy('p.name', $ordre)
                 ->getQuery()
-                ->getResult();       
+                ->getResult();   
     } 
     
     public function findAllOrderByNbFormations($ordre) : array {

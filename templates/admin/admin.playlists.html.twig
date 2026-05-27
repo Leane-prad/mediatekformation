@@ -39,10 +39,11 @@
                                     value="{{ categorie.id }}">{{ categorie.name }}
                                 </option>
                             {% endfor %}
-                        </select>                    
+                        </select> 
+                         <input type="hidden" name="_token" value="{{ csrf_token('filtre_id') }}">
                     </form>            
                 </th>
-                <th class="text-left align-top" scope="col">
+                <th class="text-center align-top" scope="col">
                     nombre de formations </br>
                     <a href="{{ path('admin.playlists.sort', {champ:'nbFormations', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
                     <a href="{{ path('admin.playlists.sort', {champ:'nbFormations', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
@@ -67,10 +68,8 @@
                                 &nbsp;{{ category }}
                             {% endfor %}
                         </td>   
-                        <td>
-                            <h5 class="text-info">
+                        <td class="text-center">
                                 {{ playlist.nbFormations }}
-                            </h5>
                         </td>
                         <td class="text-center">
                             <a href="{{ path('admin.playlist.edit', {id:playlist.id}) }}" class="btn btn-secondary">Modifier</a>

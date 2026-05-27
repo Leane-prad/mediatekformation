@@ -7,7 +7,7 @@
                     playlist<br />
                     <a href="{{ path('playlists.sort', {champ:'name', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
                     <a href="{{ path('playlists.sort', {champ:'name', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
-                    <form class="form-inline mt-1" method="POST" action="{{ path('playlists.findallcontain', {champ:'name'}) }}">
+                    <form class="form-inline mt-1" id="playlist" method="POST" action="{{ path('playlists.findallcontain', {champ:'name'}) }}">
                         <div class="form-group mr-1 mb-2">
                             <input type="text" class="sm" name="recherche" 
                                    value="{% if valeur|default and not table|default %}{{ valeur }}{% endif %}">
@@ -29,10 +29,11 @@
                                     value="{{ categorie.id }}">{{ categorie.name }}
                                 </option>
                             {% endfor %}
-                        </select>                    
+                        </select>  
+                         <input type="hidden" name="_token" value="{{ csrf_token('filtre_id') }}">
                     </form>            
                 </th>
-                <th class="text-left align-top" scope="col">
+                <th class="text-center align-top" scope="col">
                     nombre de formations </br>
                     <a href="{{ path('playlists.sort', {champ:'nbFormations', ordre:'ASC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true"><</a>
                     <a href="{{ path('playlists.sort', {champ:'nbFormations', ordre:'DESC'}) }}" class="btn btn-info btn-sm active" role="button" aria-pressed="true">></a>
@@ -57,10 +58,8 @@
                                  &nbsp;{{ category }}
                             {% endfor %}
                         </td>   
-                        <td>
-                            <h5 class="text-info">
+                        <td class="text-center">
                                 {{ playlist.nbFormations }}
-                            </h5>
                         </td>
                         <td class="text-center">
                             <a href="{{ path('playlists.showone', {id:playlist.id}) }}" class="btn btn-secondary">Voir détail</a>

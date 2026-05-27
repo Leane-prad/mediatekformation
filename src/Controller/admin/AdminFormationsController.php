@@ -109,6 +109,6 @@ class AdminFormationsController extends AbstractController {
                         'table' => $table
             ]);
         }
-        return $this->redirectToRoute(self::ADMIN_FORMATIONS_TEMPLATE);
+        return $this->redirectToRoute('admin.formations');
     }
 }
